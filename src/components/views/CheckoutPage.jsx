@@ -21,7 +21,7 @@ const CheckoutPage = () => {
                 Address: <span className="font-[400]">Rwanda, Kigali City</span>
               </h2>
 
-              <Link to={"/cart"} className="text-blue-400 hover:underline">
+              <Link to={"/shipping"} className="text-blue-400 hover:underline">
                 Edit
               </Link>
             </div>
