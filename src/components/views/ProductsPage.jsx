@@ -1,12 +1,23 @@
 /* eslint-disable */
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import Product from "../subcomponents/Product";
 import p1 from "../../assets/images/p1.jpg";
 import p2 from "../../assets/images/p2.jpg";
 import p3 from "../../assets/images/p3.jpg";
 import p4 from "../../assets/images/p4.jpg";
+import { Store } from "../../Store";
+import { useNavigate } from "react-router-dom";
 
 const ProductsPage = () => {
+  const navigate = useNavigate();
+  const { state, dispatch } = useContext(Store);
+  const { userInfo } = state;
+  useEffect(() => {
+    if (!userInfo) {
+      navigate("/login");
+    }
+  }, []);
+  console.log(userInfo);
   const data = [
     {
       id: 2,
@@ -27,12 +38,13 @@ const ProductsPage = () => {
       image: p4,
     },
   ];
+
   return (
     <div className="flex gap-10 justify-center flex-wrap">
       {data.map((product) => {
         return (
           <>
-            <Product data={product} />
+            <Product key={product.id} data={product} />
           </>
         );
       })}
