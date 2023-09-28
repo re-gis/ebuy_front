@@ -1,7 +1,17 @@
 /* eslint-disable */
-import React from "react";
+import React, { useContext, useEffect } from "react";
+import { Store } from "../../Store";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const { state, dispatch } = useContext(Store);
+  const { userInfo } = state;
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (userInfo) {
+      navigate("/");
+    }
+  }, [userInfo, navigate]);
   return (
     <>
       <div className="flex flex-col justify-center items-center gap-10">

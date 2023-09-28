@@ -1,6 +1,6 @@
 /* eslint-disable */
 import axios from "axios";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Store } from "../../Store";
@@ -14,6 +14,12 @@ const Signup = () => {
 
   const { state, dispatch } = useContext(Store);
   const { userInfo } = state;
+
+  useEffect(() => {
+    if (userInfo) {
+      navigate("/");
+    }
+  }, [userInfo, navigate]);
 
   const handleRegister = async (e) => {
     e.preventDefault();

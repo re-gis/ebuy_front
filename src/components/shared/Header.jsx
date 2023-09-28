@@ -10,13 +10,16 @@ const Header = () => {
 
   const navigate = useNavigate();
   useEffect(() => {
-    navigate("/login");
-  }, []);
+    if (!userInfo) {
+      navigate("/login");
+    }
+  }, [userInfo, navigate]);
 
   const handleSignout = (e) => {
     e.preventDefault();
     try {
       dispatch({ type: "USER_SIGNOUT" });
+      localStorage.removeItem("userInfo");
     } catch (error) {
       toast.error(error.response.data.message);
     }
@@ -39,7 +42,8 @@ const Header = () => {
           </li>
           <li>
             <h1 className="flex items-center gap-1 cursor-pointer relative">
-              {userInfo.data.firstName} {userInfo.data.lastName}
+              {userInfo && userInfo.data.firstName}{" "}
+              {userInfo && userInfo.data.lastName}
               <i class="fa fa-chevron-down" aria-hidden="true"></i>
               <div
                 onClick={handleSignout}

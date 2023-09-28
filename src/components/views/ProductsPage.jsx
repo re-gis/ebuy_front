@@ -16,8 +16,7 @@ const ProductsPage = () => {
     if (!userInfo) {
       navigate("/login");
     }
-  }, []);
-  console.log(userInfo);
+  }, [userInfo, navigate]);
   const data = [
     {
       id: 2,
